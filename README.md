@@ -48,9 +48,6 @@ The `ArtworkList` component displays a paginated list of artworks. Users can fil
 - `Footer` (Footer component)
 - `Loading` (Loading spinner component)
 
-### Props
-None
-
 ### State
 - `artworks`: List of all artworks.
 - `filteredArtworks`: List of artworks filtered by title and category.
@@ -91,9 +88,6 @@ The `ArtworkDetail` component shows details for a single artwork, including an i
 - `Footer` (Footer component)
 - `Loading` (Loading spinner component)
 
-### Props
-None
-
 ### State
 - `artwork`: Details of the selected artwork.
 - `form`: Data for the comment form (email, name, text).
@@ -108,7 +102,3 @@ None
 ### Rendered Output
 - **Artwork Details**: Image, title, artist, date, reference number, dimensions, and category badges.
 - **Comment Form**: Fields for email, name, and comment with validation errors.
-
----
-
-Feel free to expand or adjust based on your needs!
