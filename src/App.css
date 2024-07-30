@@ -1,0 +1,86 @@
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.card-wrapper {
+  margin-bottom: 12px;
+}
+.card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.card-img-top {
+  flex: 0 0 auto; /* Ensure image doesn't grow or shrink */
+}
+
+.card-body {
+  flex: 1 0 auto; /* Allow card body to grow */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-bottom: 0;
+}
+
+.card,
+.card-body {
+  background: #333;
+  color: #fff;
+  border: 0;
+}
+
+.card-title {
+  margin-bottom: 10px; /* Space between title and button */
+}
+
+.btn-primary {
+  margin-top: auto; /* Push button to the bottom of the card */
+}
+.card-title {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2; /* Limit to 3 lines */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  height: 40px;
+}
+.badge {
+  max-width: 100%;
+  font-size: 0.7rem;
+}
+.page-item {
+  cursor: pointer;
+}
+a {
+  text-decoration: none;
+  color: #333;
+}
+h5 {
+  font-size: 1rem;
+}
+.page-link {
+  color: #444;
+}
+.page-link:hover {
+  color: #000;
+}
+.active > .page-link,
+.page-link.active {
+  background: #000;
+  border: #000;
+}
+.card img {
+  opacity: 0.6;
+}
+
+.card img:hover {
+  opacity: 9.9;
+}
+.light {
+  color: #fff;
+  text-align: center;
+  padding-top: 12px;
+}
