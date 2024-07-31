@@ -84,3 +84,11 @@ h5 {
   text-align: center;
   padding-top: 12px;
 }
+.error{
+  font-size: 0.8rem;
+}
+.avatar{
+  height: 40px;
+  width: 40px;
+  border-radius: 50px;
+}

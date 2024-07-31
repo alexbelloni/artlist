@@ -19,6 +19,7 @@ const ArtworkDetail: React.FC = () => {
     name: "",
     text: "",
   });
+  const [comments, setComments] = useState<any[]>([]);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -72,7 +73,16 @@ const ArtworkDetail: React.FC = () => {
     e.preventDefault();
     if (validateForm()) {
       // Submit form logic
+
+      const newComment = {
+        id: Date.now(),
+        email: form.email,
+        name: form.name,
+        text: form.text,
+      };
       console.log("Form submitted:", form);
+      setComments([...comments, newComment]);
+      setForm({ email: "", name: "", text: "" });
     }
   };
 
@@ -130,6 +140,26 @@ const ArtworkDetail: React.FC = () => {
                 </div>
                 <hr className="mt-4" />
                 <div className="mt-4">
+                  <h4>Comments</h4>
+
+                  {comments.length === 0 ? (
+                    <p>No comments yet!</p>
+                  ) : (
+                    comments.map((comment) => (
+                      <>
+                        <div key={comment.id} className="mb-3">
+                          <div className="d-flex justify-content-between align-items-center">
+                            <h5 className="mb-0">
+                              <img src={"../default_image.png"} className="avatar"/>{' '}{comment.name}</h5>
+                            <span className="text-secondary">{comment.email}</span>
+                          </div>
+                          <p className="mt-2 bg-light p-2 text-secondary text-muted fst-italic">{comment.text}</p>
+                          <hr />
+                        </div>
+                      </>
+                    ))
+                  )}
+
                   <h4>Leave a Comment</h4>
                   <form onSubmit={handleSubmit}>
                     <div className="mb-3">
@@ -145,7 +175,7 @@ const ArtworkDetail: React.FC = () => {
                         className="form-control"
                       />
                       {errors.email && (
-                        <div className="text-danger">{errors.email}</div>
+                        <div className="text-danger error">{errors.email}</div>
                       )}
                     </div>
                     <div className="mb-3">
@@ -161,13 +191,14 @@ const ArtworkDetail: React.FC = () => {
                         className="form-control"
                       />
                       {errors.name && (
-                        <div className="text-danger">{errors.name}</div>
+                        <div className="text-danger error">{errors.name}</div>
                       )}
                     </div>
                     <div className="mb-3">
                       <label htmlFor="text" className="form-label">
                         Comment
                       </label>
+
                       <textarea
                         id="text"
                         name="text"
@@ -177,7 +208,7 @@ const ArtworkDetail: React.FC = () => {
                         className="form-control"
                       />
                       {errors.text && (
-                        <div className="text-danger">{errors.text}</div>
+                        <div className="text-danger error">{errors.text}</div>
                       )}
                     </div>
                     <button type="submit" className="btn btn-success">

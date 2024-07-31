@@ -117,7 +117,7 @@ const ArtworkList: React.FC = () => {
       <div className="container pt-4">
         <div className="mb-4 mt-4">
           <div className="row">
-            <div className="col-md-6">
+            <div className="col-md-6 pb-2">
               <input
                 type="text"
                 className="form-control"
@@ -126,7 +126,7 @@ const ArtworkList: React.FC = () => {
                 onChange={(e) => setFilter(e.target.value)}
               />
             </div>
-            <div className="col-md-6">
+            <div className="col-md-6 pb-2">
               <select
                 className="form-select"
                 value={selectedDropdownCategory}
