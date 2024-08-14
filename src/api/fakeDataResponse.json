@@ -1,0 +1,93 @@
+[
+  {
+    "id": 234,
+    "images": [
+      "https://example.com/image1.jpg",
+      "https://example.com/image2.jpg"
+    ],
+    "title": "Starry Night",
+    "collections": [
+      "Modern Art",
+      "Impressionism"
+    ],
+    "artists": [
+      "Vincent van Gogh"
+    ],
+    "object_date": "1889-06-01",
+    "accession_number": "123123440",
+    "dimensions": "73.7 cm x 92.1 cm"
+  },
+  {
+    "id": 456,
+    "images": [
+      "https://example.com/image3.jpg",
+      "https://example.com/image4.jpg"
+    ],
+    "title": "Mona Lisa",
+    "collections": [
+      "Renaissance",
+      "Portraits"
+    ],
+    "artists": [
+      "Leonardo da Vinci"
+    ],
+    "object_date": "1503-10-01",
+    "accession_number": "123123441",
+    "dimensions": "77 cm x 53 cm"
+  },
+  {
+    "id": 252,
+    "images": [
+      "https://example.com/image5.jpg",
+      "https://example.com/image6.jpg"
+    ],
+    "title": "The Persistence of Memory",
+    "collections": [
+      "Surrealism",
+      "Modern Art"
+    ],
+    "artists": [
+      "Salvador Dalí"
+    ],
+    "object_date": "1931-01-01",
+    "accession_number": "123123442",
+    "dimensions": "24 cm x 33 cm"
+  },
+  {
+    "id": 532,
+    "images": [
+      "https://example.com/image7.jpg",
+      "https://example.com/image8.jpg"
+    ],
+    "title": "The Birth of Venus",
+    "collections": [
+      "Renaissance",
+      "Mythology"
+    ],
+    "artists": [
+      "Sandro Botticelli"
+    ],
+    "object_date": "1484-1486",
+    "accession_number": "123123443",
+    "dimensions": "172.5 cm x 278.9 cm"
+  },
+  {
+    "id": 553,
+    "images": [
+      "https://example.com/image9.jpg",
+      "https://example.com/image10.jpg"
+    ],
+    "title": "Guernica",
+    "collections": [
+      "Modern Art",
+      "War Art"
+    ],
+    "artists": [
+      "Pablo Picasso"
+    ],
+    "object_date": "1937-01-01",
+    "accession_number": "123123444",
+    "dimensions": "349 cm x 776 cm"
+  }
+]
+

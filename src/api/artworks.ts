@@ -1,10 +1,25 @@
+import { ArtObject } from './ArtObject'
+
 const BASE_URL = "https://api.artic.edu/api/v1";
 
-export const fetchArtworks = async (page: number) => {
-  const response = await fetch(`${BASE_URL}/artworks?page=${page}&limit=12`);
-  const data = await response.json();
-  return data;
+const getImageUrl = (imageId: string) => {
+  return `https://www.artic.edu/iiif/2/${imageId}/full/843,/0/default.jpg`;
 };
+
+export const fetchArtworks = async (page: number, per_page: number) => {
+  const response = await fetch(`${BASE_URL}/artworks?page=${page}&limit=${per_page / 2}`);
+  const chicagoObjects = await response.json();
+
+  return {
+    "pagination": {
+      "total_pages": chicagoObjects.pagination.total_pages
+    },
+    "data": chicagoObjects.data.map((d: ArtObject) => {
+      return { ...d, location_name: "Chicago Museum", image_url: d.image_id ? getImageUrl(d.image_id)
+        : "default_image.png" }
+    })
+  };
+}
 
 export const fetchArtworkDetails = async (id: number) => {
   const response = await fetch(`${BASE_URL}/artworks/${id}`);

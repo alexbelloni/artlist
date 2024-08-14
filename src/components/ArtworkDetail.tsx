@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { fetchArtworkDetails } from "../api/artworks";
-import { getImageUrl } from "../api/imageUtils";
 import Header from "./Header";
 import Loading from "./Loading";
 import Footer from "./Footer";
@@ -103,9 +102,7 @@ const ArtworkDetail: React.FC = () => {
               <div className="col-md-6 mb-4">
                 <img
                   src={
-                    artwork.image_id
-                      ? getImageUrl(artwork.image_id)
-                      : "default_image.png"
+                    artwork.image_url || "default_image.png"
                   }
                   alt={artwork.title ?? "Artwork thumbnail"}
                   className="img-fluid"
@@ -150,7 +147,7 @@ const ArtworkDetail: React.FC = () => {
                         <div key={comment.id} className="mb-3">
                           <div className="d-flex justify-content-between align-items-center">
                             <h5 className="mb-0">
-                              <img src={"../default_image.png"} className="avatar"/>{' '}{comment.name}</h5>
+                              <img src={"../default_image.png"} className="avatar" alt="avatar"/>{' '}{comment.name}</h5>
                             <span className="text-secondary">{comment.email}</span>
                           </div>
                           <p className="mt-2 bg-light p-2 text-secondary text-muted fst-italic">{comment.text}</p>
