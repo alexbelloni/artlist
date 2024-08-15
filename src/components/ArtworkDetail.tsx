@@ -4,6 +4,7 @@ import { fetchArtworkDetails } from "../api/artworks";
 import Header from "./Header";
 import Loading from "./Loading";
 import Footer from "./Footer";
+import Badge from "./Badge";
 
 const ArtworkDetail: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -124,13 +125,11 @@ const ArtworkDetail: React.FC = () => {
                 <p>
                   <strong>Dimensions:</strong> {artwork.dimensions}
                 </p>
-                <div className="pb-4">
+                <div className="badge-group pb-4">
                   {artwork.category_titles?.length
                     ? artwork.category_titles.map(
                         (category: string, index: number) => (
-                          <span key={index} className="badge bg-secondary me-1">
-                            {category}
-                          </span>
+                          <Badge key={index} tag={category}/>
                         )
                       )
                     : "Unknown Category"}

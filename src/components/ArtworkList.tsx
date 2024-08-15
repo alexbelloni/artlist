@@ -7,6 +7,7 @@ import Header from "./Header";
 import Footer from "./Footer";
 import Loading from "./Loading";
 import { ArtObject } from "../api/ArtObject";
+import Badge from "./Badge";
 
 const ArtworkList: React.FC = () => {
   const [artworks, setArtworks] = useState<any[]>([]);
@@ -166,7 +167,7 @@ const ArtworkList: React.FC = () => {
                   key={artwork.id}
                   className="col-lg-3 col-md-6 col-12 card-wrapper"
                 >
-                  <div className="card mb-4 shadow-sm">
+                  <div className="card shadow-sm">
                     {artwork.image_url ? <Link
                       to={`/artwork/${artwork.id}`}
                       className="text-decoration-none"
@@ -185,15 +186,10 @@ const ArtworkList: React.FC = () => {
                             ? `${artwork.title.substring(0, 197)}...`
                             : artwork.title}
                         </h5>
-                        <div>
+                        <div className="badge-group">
                           {artwork.category_titles?.map(
                             (category: string, index: number) => (
-                              <span
-                                key={index}
-                                className="badge bg-secondary me-1"
-                              >
-                                {category}
-                              </span>
+                              <Badge key={index} tag={category} />
                             )
                           ) || "Unknown Category"}
                         </div>
@@ -214,21 +210,19 @@ const ArtworkList: React.FC = () => {
                               ? `${artwork.title.substring(0, 197)}...`
                               : artwork.title}
                           </h5>
-                          <div>
+                          <div className="badge-group">
                             {artwork.category_titles?.map(
                               (category: string, index: number) => (
-                                <span
-                                  key={index}
-                                  className="badge bg-secondary me-1"
-                                >
-                                  {category}
-                                </span>
+                                <Badge key={index} tag={category} />
                               )
                             ) || "Unknown Category"}
                           </div>
                         </div>
                       </div>
                     }
+                    <div className="art-location mt-3">
+                      <Badge key={1} tag={artwork.location_name} />
+                    </div>
 
                   </div>
                 </div>

@@ -12,6 +12,7 @@
   display: flex;
   flex-direction: column;
   height: 100%;
+  justify-content: space-between;
 }
 
 .card-img-top {
@@ -44,7 +45,7 @@
   /* Limit to 3 lines */
   overflow: hidden;
   text-overflow: ellipsis;
-  height: 40px;
+  /* height: 40px; */
 }
 
 .btn-primary {
@@ -52,9 +53,28 @@
   /* Push button to the bottom of the card */
 }
 
+.badge-group{
+  display: block;
+  width: 100%;
+  height: 
+}
+
 .badge {
   max-width: 100%;
   font-size: 0.7rem;
+  margin: 2px 2px;
+  padding: 9px;
+}
+
+.badge-group>div:first-child{
+  margin-left: 0;
+}
+
+.art-location > *{
+  margin: 0;
+  width: 100%;
+  background: #333000 !important;
+  color: #FFF !important;
 }
 
 .page-item {
