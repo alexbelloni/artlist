@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { fetchArtworks } from "../api/artworks";
-import { fetchArtworks as fetchAllArtworksBrooklyn } from "../api/artworksBrooklyn";
+//import { fetchArtworks } from "../api/locations/chicago/artworks";
+//import { fetchArtworks as fetchAllArtworksBrooklyn } from "../api/locations/brooklyn/artworks";
 import { Link, useLocation } from "react-router-dom";
 
 import Header from "./Header";
@@ -8,6 +8,7 @@ import Footer from "./Footer";
 import Loading from "./Loading";
 import { ArtObject } from "../api/ArtObject";
 import Badge from "./Badge";
+import { getNextPage } from "../api/getNextPage";
 
 const ArtworkList: React.FC = () => {
   const [artworks, setArtworks] = useState<any[]>([]);
@@ -20,37 +21,21 @@ const ArtworkList: React.FC = () => {
   const [categories, setCategories] = useState<string[]>([]);
   const [selectedDropdownCategory, setSelectedDropdownCategory] =
     useState<string>("");
+    const [pageCreatedAt, setPageCreatedAt] = useState('')
 
   const location = useLocation();
 
-  const PAGE_LIMIT = 2
   const PER_PAGE_LIMIT = 12
 
   useEffect(() => {
     const fetchAllArtworks = async () => {
       setLoading(true);
-      const allArtworks: ArtObject[] = [];
-      let currentPage = 1;
-      let totalPages = 1;
+      const items = await getNextPage(page);
+      const allArtworks: ArtObject[] = items.data;
 
-      while (currentPage <= PAGE_LIMIT && currentPage <= totalPages) {
-        const data = await fetchArtworks(currentPage, PER_PAGE_LIMIT);
-        if (data) {
-          allArtworks.push(...data.data);
-
-          totalPages = data.pagination.total_pages;
-          currentPage++;
-        } else {
-          totalPages = 0;
-        }
-      }
-
-      const data = await fetchAllArtworksBrooklyn(currentPage, PER_PAGE_LIMIT);
-
-      const all = data.data.concat(allArtworks)
-
-      setArtworks(all);
-      setFilteredArtworks(all);
+      setPageCreatedAt(items.created)
+      setArtworks(allArtworks);
+      setFilteredArtworks(allArtworks);
 
       // Extract unique categories from the artworks
       const uniqueCategories = Array.from(
@@ -58,7 +43,7 @@ const ArtworkList: React.FC = () => {
       );
 
       setCategories(uniqueCategories);
-      setTotalPages(Math.ceil(all.length / PER_PAGE_LIMIT));
+      //setTotalPages(Math.ceil(allArtworks.length / PER_PAGE_LIMIT));
       setLoading(false);
     };
 
@@ -161,6 +146,7 @@ const ArtworkList: React.FC = () => {
           <Loading />
         ) : (
           <>
+          {/* <p>{pageCreatedAt}</p> //todo: displayable date time */}
             <div className="row">
               {paginatedArtworks.map((artwork) => (
                 <div
@@ -189,7 +175,7 @@ const ArtworkList: React.FC = () => {
                         <div className="badge-group">
                           {artwork.category_titles?.map(
                             (category: string, index: number) => (
-                              <Badge key={index} tag={category} />
+                              <Badge key={index} index={index.toString()} tag={category} />
                             )
                           ) || "Unknown Category"}
                         </div>
@@ -213,7 +199,7 @@ const ArtworkList: React.FC = () => {
                           <div className="badge-group">
                             {artwork.category_titles?.map(
                               (category: string, index: number) => (
-                                <Badge key={index} tag={category} />
+                                <Badge  key={index} index={index.toString()} tag={category} />
                               )
                             ) || "Unknown Category"}
                           </div>
@@ -221,7 +207,7 @@ const ArtworkList: React.FC = () => {
                       </div>
                     }
                     <div className="art-location mt-3">
-                      <Badge key={1} tag={artwork.location_name} />
+                      <Badge  key={1} index={artwork.location_name} tag={artwork.location_name} />
                     </div>
 
                   </div>

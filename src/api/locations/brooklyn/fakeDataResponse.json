@@ -1,5 +1,22 @@
 [
   {
+    "id": 232,
+    "images": [
+      "https://example.com/image1.jpg",
+      "https://example.com/image2.jpg"
+    ],
+    "title": "Modern Frame",
+    "collections": [
+      "Modern Art"
+    ],
+    "artists": [
+      "Arnold van Gogh"
+    ],
+    "object_date": "1899-06-01",
+    "accession_number": "123123240",
+    "dimensions": "73.7 cm x 92.1 cm"
+  },
+  {
     "id": 234,
     "images": [
       "https://example.com/image1.jpg",

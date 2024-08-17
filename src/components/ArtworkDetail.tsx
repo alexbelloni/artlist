@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { fetchArtworkDetails } from "../api/artworks";
+import { fetchArtworkDetails } from "../api/locations/chicago/artworks";
 import Header from "./Header";
 import Loading from "./Loading";
 import Footer from "./Footer";
@@ -129,7 +129,7 @@ const ArtworkDetail: React.FC = () => {
                   {artwork.category_titles?.length
                     ? artwork.category_titles.map(
                         (category: string, index: number) => (
-                          <Badge key={index} tag={category}/>
+                          <Badge index={category} tag={category}/>
                         )
                       )
                     : "Unknown Category"}

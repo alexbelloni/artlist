@@ -1,12 +1,10 @@
+import { ArtObject } from "../../ArtObject";
 import fakeDataResponse from "./fakeDataResponse.json"
 //import { ArtObject } from './ArtObject'
 
 export const fetchArtworks = async (page: number, per_page: number) => {
-  const brooklynObjects = {
-    "pagination": {
-      "total_pages": 1
-    },
-    "data": fakeDataResponse.map((obj) => {
+  return new Promise<ArtObject[]>((resolve) => {
+    const response: ArtObject[] = fakeDataResponse.map((obj) => {
       const { id, title, collections, artists, object_date, accession_number, dimensions } = obj;
       const x = {
         id: id * -1, image_id: "", title, category_titles: collections, artist_display: artists.join(', '),
@@ -16,16 +14,12 @@ export const fetchArtworks = async (page: number, per_page: number) => {
         location_name: "Brooklyn Museum",
         image_url: ""
       }
-      return x
+      return x;
     })
-  }
-
-  return {
-    "pagination": {
-      "total_pages": brooklynObjects.pagination.total_pages
-    },
-    "data": brooklynObjects.data
-  };
+    setTimeout(() => {
+      resolve(response);
+    }, 4000)//Math.floor(Math.random() * max);
+  })
 }
 
 export const fetchArtworkDetails = async (id: number) => {
