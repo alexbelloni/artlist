@@ -1,13 +1,12 @@
 import React from "react";
 
 type AppProps = {
-    index: string,
     tag: string
 };
 
-const Badge: React.FC<AppProps> = ({ index, tag }) => {
+const Badge: React.FC<AppProps> = ({ tag }) => {
     return (
-        <div key={index}
+        <div 
             className="badge bg-dark text-white">
             <span>
                 {tag}

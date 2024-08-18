@@ -127,3 +127,11 @@ h5 {
   width: 40px;
   border-radius: 50px;
 }
+
+.createdDate{
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  font-weight: 400;
+  font-size: 14px;
+}

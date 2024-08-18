@@ -8,7 +8,7 @@ import Footer from "./Footer";
 import Loading from "./Loading";
 import { ArtObject } from "../api/ArtObject";
 import Badge from "./Badge";
-import { getNextPage } from "../api/getNextPage";
+import { getPage } from "../api/getPage";
 
 const ArtworkList: React.FC = () => {
   const [artworks, setArtworks] = useState<any[]>([]);
@@ -21,7 +21,7 @@ const ArtworkList: React.FC = () => {
   const [categories, setCategories] = useState<string[]>([]);
   const [selectedDropdownCategory, setSelectedDropdownCategory] =
     useState<string>("");
-    const [pageCreatedAt, setPageCreatedAt] = useState('')
+  const [pageCreatedAt, setPageCreatedAt] = useState('')
 
   const location = useLocation();
 
@@ -30,7 +30,7 @@ const ArtworkList: React.FC = () => {
   useEffect(() => {
     const fetchAllArtworks = async () => {
       setLoading(true);
-      const items = await getNextPage(page);
+      const items = await getPage(page);
       const allArtworks: ArtObject[] = items.data;
 
       setPageCreatedAt(items.created)
@@ -146,7 +146,6 @@ const ArtworkList: React.FC = () => {
           <Loading />
         ) : (
           <>
-          {/* <p>{pageCreatedAt}</p> //todo: displayable date time */}
             <div className="row">
               {paginatedArtworks.map((artwork) => (
                 <div
@@ -175,7 +174,7 @@ const ArtworkList: React.FC = () => {
                         <div className="badge-group">
                           {artwork.category_titles?.map(
                             (category: string, index: number) => (
-                              <Badge key={index} index={index.toString()} tag={category} />
+                              <Badge key={index} tag={category} />
                             )
                           ) || "Unknown Category"}
                         </div>
@@ -199,7 +198,7 @@ const ArtworkList: React.FC = () => {
                           <div className="badge-group">
                             {artwork.category_titles?.map(
                               (category: string, index: number) => (
-                                <Badge  key={index} index={index.toString()} tag={category} />
+                                <Badge key={index} tag={category} />
                               )
                             ) || "Unknown Category"}
                           </div>
@@ -207,12 +206,15 @@ const ArtworkList: React.FC = () => {
                       </div>
                     }
                     <div className="art-location mt-3">
-                      <Badge  key={1} index={artwork.location_name} tag={artwork.location_name} />
+                      <Badge key={1} tag={artwork.location_name} />
                     </div>
 
                   </div>
                 </div>
               ))}
+            </div>
+            <div className="createdDate">
+              <p>created at {pageCreatedAt}</p>
             </div>
             <nav>{renderPagination()}</nav>
           </>

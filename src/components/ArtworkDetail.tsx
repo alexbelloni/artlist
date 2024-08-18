@@ -129,7 +129,7 @@ const ArtworkDetail: React.FC = () => {
                   {artwork.category_titles?.length
                     ? artwork.category_titles.map(
                         (category: string, index: number) => (
-                          <Badge index={category} tag={category}/>
+                          <Badge key={index} tag={category}/>
                         )
                       )
                     : "Unknown Category"}
