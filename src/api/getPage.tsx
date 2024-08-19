@@ -12,7 +12,7 @@ export const getPage = async (currentPage: number) => {
 
     const data = data1.concat(data2).sort((a, b) => a.date_display < b.date_display ? -1 : 1);
 
-    const items = { page: currentPage, created: (new Date(Date.now())).toISOString().replace('T', ' '), data }
+    const items = { page: currentPage, created: (new Date(Date.now())).toISOString().replace('T', ' ').replace('Z', ' '), data }
     localStorage.setItem(currentPage.toString(), JSON.stringify(items));
     return items;
 }

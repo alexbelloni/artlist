@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from "react";
-//import { fetchArtworks } from "../api/locations/chicago/artworks";
-//import { fetchArtworks as fetchAllArtworksBrooklyn } from "../api/locations/brooklyn/artworks";
 import { Link, useLocation } from "react-router-dom";
 
 import Header from "./Header";
@@ -115,7 +113,7 @@ const ArtworkList: React.FC = () => {
     <>
       <Header />
       <div className="container pt-4">
-        <div className="mb-4 mt-4">
+        {/* <div className="mb-4 mt-4">
           <div className="row">
             <div className="col-md-6 pb-2">
               <input
@@ -141,7 +139,7 @@ const ArtworkList: React.FC = () => {
               </select>
             </div>
           </div>
-        </div>
+        </div> */}
         {loading || pageChanging ? (
           <Loading />
         ) : (
@@ -214,7 +212,7 @@ const ArtworkList: React.FC = () => {
               ))}
             </div>
             <div className="createdDate">
-              <p>created at {pageCreatedAt}</p>
+              <p>page created at {pageCreatedAt}</p>
             </div>
             <nav>{renderPagination()}</nav>
           </>

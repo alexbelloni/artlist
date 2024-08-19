@@ -103,7 +103,7 @@ const ArtworkDetail: React.FC = () => {
               <div className="col-md-6 mb-4">
                 <img
                   src={
-                    artwork.image_url || "default_image.png"
+                    artwork.image_url || "../default_image.png"
                   }
                   alt={artwork.title ?? "Artwork thumbnail"}
                   className="img-fluid"
@@ -134,8 +134,8 @@ const ArtworkDetail: React.FC = () => {
                       )
                     : "Unknown Category"}
                 </div>
-                <hr className="mt-4" />
-                <div className="mt-4">
+                {/* <hr className="mt-4" /> */}
+                {/* <div className="mt-4">
                   <h4>Comments</h4>
 
                   {comments.length === 0 ? (
@@ -211,7 +211,7 @@ const ArtworkDetail: React.FC = () => {
                       Send
                     </button>
                   </form>
-                </div>
+                </div> */}
               </div>
             </div>
           </>
