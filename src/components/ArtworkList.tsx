@@ -19,95 +19,122 @@ const ArtworkList: React.FC = () => {
   const [categories, setCategories] = useState<string[]>([]);
   const [selectedDropdownCategory, setSelectedDropdownCategory] =
     useState<string>("");
-  const [pageCreatedAt, setPageCreatedAt] = useState('')
-
+  const [pageCachedAt, setPageCachedAt] = useState('')
+  //const [renderArea, setRenderArea] = useState(<nav><li>aaaa</li></nav>)
+  const [renderArea, setRenderArea] = useState(<p>asasas</p>)
   const location = useLocation();
 
   const PER_PAGE_LIMIT = 12
+  const QUANTITY = 5;
 
   useEffect(() => {
     const fetchAllArtworks = async () => {
       setLoading(true);
+
+      let pageQuantityWhenStarting = QUANTITY;
+      while (pageQuantityWhenStarting) {
+        await getPage(pageQuantityWhenStarting--)
+      }
+      //renderPagination()
+
       const items = await getPage(page);
       const allArtworks: ArtObject[] = items.data;
 
-      setPageCreatedAt(items.created)
+      setPageCachedAt(items.cached)
       setArtworks(allArtworks);
       setFilteredArtworks(allArtworks);
 
       // Extract unique categories from the artworks
-      const uniqueCategories = Array.from(
-        new Set(allArtworks.flatMap((artwork) => artwork.category_titles || []))
-      );
+      // const uniqueCategories = Array.from(
+      //   new Set(allArtworks.flatMap((artwork) => artwork.category_titles || []))
+      // );
 
-      setCategories(uniqueCategories);
+      // setCategories(uniqueCategories);
       //setTotalPages(Math.ceil(allArtworks.length / PER_PAGE_LIMIT));
+      setPage(1)
       setLoading(false);
     };
 
     fetchAllArtworks();
   }, []);
 
-  useEffect(() => {
-    // Parse page number from URL query parameters
-    const queryParams = new URLSearchParams(location.search);
-    const pageParam = parseInt(queryParams.get("page") || "1", 10);
-    if (pageParam >= 1 && pageParam <= totalPages) {
-      setPage(pageParam);
-    }
-  }, [location.search, totalPages]);
+  // useEffect(() => {
+  //   // Parse page number from URL query parameters
+  //   const queryParams = new URLSearchParams(location.search);
+  //   const pageParam = parseInt(queryParams.get("page") || "1", 10);
+  //   if (pageParam >= 1 && pageParam <= totalPages) {
+  //     setPage(pageParam);
+  //   }
+  // }, [location.search, totalPages]);
 
-  useEffect(() => {
-    // Apply filter when filter text changes, category changes, or artworks data changes
-    const applyFilter = () => {
-      const filtered = artworks.filter(
-        (artwork) =>
-          artwork.title.toLowerCase().includes(filter.toLowerCase()) &&
-          (selectedDropdownCategory === "" ||
-            artwork.category_titles.includes(selectedDropdownCategory))
-      );
-      setFilteredArtworks(filtered);
-      setTotalPages(Math.ceil(filtered.length / PER_PAGE_LIMIT));
-      setPage(1);
-    };
+  // useEffect(() => {
+  //   // Apply filter when filter text changes, category changes, or artworks data changes
+  //   const applyFilter = () => {
+  //     const filtered = artworks.filter(
+  //       (artwork) =>
+  //         artwork.title.toLowerCase().includes(filter.toLowerCase()) &&
+  //         (selectedDropdownCategory === "" ||
+  //           artwork.category_titles.includes(selectedDropdownCategory))
+  //     );
+  //     setFilteredArtworks(filtered);
+  //     setTotalPages(Math.ceil(filtered.length / PER_PAGE_LIMIT));
+  //     setPage(1);
+  //   };
 
-    applyFilter();
-  }, [filter, selectedDropdownCategory, artworks]);
+  //   applyFilter();
+  // }, [filter, selectedDropdownCategory, artworks]);
 
-  const handlePageChange = (newPage: number) => {
-    setPageChanging(true);
+  const handlePageChange = async (newPage: number) => {
     window.scrollTo(0, 0);
 
-    setTimeout(() => {
+    const item = await getPage(newPage);
+    const allArtworks: ArtObject[] = item.data;
+
+    console.log('item.data',item.data.length,'allArtworks',allArtworks.length,)
+
+    setPageCachedAt(item.cached)
+    setArtworks(allArtworks);
+    setFilteredArtworks(allArtworks);
+
       setPage(newPage);
-      setPageChanging(false);
 
-      // Update the URL to reflect the current page
-      window.history.pushState(null, "", `?page=${newPage}`);
-    }, 100);
   };
-
-  const paginatedArtworks = filteredArtworks.slice((page - 1) * PER_PAGE_LIMIT, page * PER_PAGE_LIMIT);
 
   const renderPagination = () => {
-    const maxPagesToShow = 10;
-    const pages = [];
-    const effectiveTotalPages = Math.min(totalPages, maxPagesToShow);
+    return (
+      <nav>
+        <ul className="pagination justify-content-center my-4">
+          {(new Array(QUANTITY)).fill('').map((q, p) => (
+            <li key={p + 1}
+              className={`page-item ${p + 1 === page ? "active" : ""}`}
+              onClick={() => handlePageChange(p + 1)}
+            >
+              <span className="page-link">{p + 1}</span>
+            </li>
+          ))}
+        </ul>
+      </nav>
+    )
 
-    for (let i = 1; i <= effectiveTotalPages; i++) {
-      pages.push(
-        <li
-          key={i}
-          className={`page-item ${i === page ? "active" : ""}`}
-          onClick={() => handlePageChange(i)}
-        >
-          <span className="page-link">{i}</span>
-        </li>
-      );
-    }
-
-    return <ul className="pagination justify-content-center my-4">{pages}</ul>;
+    // return <ul className="pagination justify-content-center my-4">{pages}</ul>;
   };
+
+  useEffect(() => {
+    setRenderArea(<nav>
+      <ul className="pagination justify-content-center my-4">
+        {(new Array(QUANTITY)).fill('').map((q, p) => (
+          <li key={p + 1}
+            className={`page-item ${p + 1 === page ? "active" : ""}`}
+            onClick={() => handlePageChange(p + 1)}
+          >
+            <span className="page-link">{p + 1}</span>
+          </li>
+        ))}
+      </ul>
+    </nav>);
+    console.log('rendered page ', page)
+
+  }, [page])
 
   return (
     <>
@@ -145,7 +172,7 @@ const ArtworkList: React.FC = () => {
         ) : (
           <>
             <div className="row">
-              {paginatedArtworks.map((artwork) => (
+              {artworks.map((artwork) => (
                 <div
                   key={artwork.id}
                   className="col-lg-3 col-md-6 col-12 card-wrapper"
@@ -212,9 +239,9 @@ const ArtworkList: React.FC = () => {
               ))}
             </div>
             <div className="createdDate">
-              <p>page created at {pageCreatedAt}</p>
+              <p>cached at {pageCachedAt}</p>
             </div>
-            <nav>{renderPagination()}</nav>
+            {renderArea}
           </>
         )}
       </div>

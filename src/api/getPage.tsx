@@ -1,18 +1,34 @@
 import { fetchArtworks as brooklyn } from './locations/brooklyn/artworks'
 import { fetchArtworks as chicago } from './locations/chicago/artworks'
+import { GetDisplayableDate, GetSecondsApart } from './utils';
 
 export const getPage = async (currentPage: number) => {
-    const PER_PAGE_LIMIT = 6;
+    const PER_PAGE_LIMIT = 12;
+    const CACHE_TIMEOUT = 180000; //3 MINUTES
 
-    const storedData = localStorage.getItem(currentPage.toString());
-    if (storedData) return JSON.parse(storedData);
+    const cachedItem = localStorage.getItem(currentPage.toString());
+    if (cachedItem) {
+        const item = JSON.parse(cachedItem);
+        if (item) {
+            console.log('found item: ', currentPage)
+            const secs = GetSecondsApart(item.date, Date.now())
+            if (secs < CACHE_TIMEOUT) {
+                console.log('cached: ', currentPage, JSON.stringify(item))
+                return item;
+            }
+        }
+    }
 
-    const data1 = await brooklyn(currentPage, PER_PAGE_LIMIT);
-    const data2 = await chicago(currentPage, PER_PAGE_LIMIT);
+    console.log('did not find item: ', currentPage)
+
+    const museums = 2;
+    const data1 = await brooklyn(currentPage, PER_PAGE_LIMIT / museums);
+    const data2 = await chicago(currentPage, PER_PAGE_LIMIT - data1.length);
 
     const data = data1.concat(data2).sort((a, b) => a.date_display < b.date_display ? -1 : 1);
 
-    const items = { page: currentPage, created: (new Date(Date.now())).toISOString().replace('T', ' ').replace('Z', ' '), data }
-    localStorage.setItem(currentPage.toString(), JSON.stringify(items));
-    return items;
+    const item = { page: currentPage, cached: GetDisplayableDate(Date.now()), date: Date.now(), data }
+    localStorage.setItem(currentPage.toString(), JSON.stringify(item));
+    console.log('saved: ', currentPage)
+    return item;
 }

@@ -2,8 +2,7 @@
   {
     "id": 232,
     "images": [
-      "https://example.com/image1.jpg",
-      "https://example.com/image2.jpg"
+      "./modern_frame.jpg"
     ],
     "title": "Modern Frame",
     "collections": [
@@ -19,8 +18,7 @@
   {
     "id": 234,
     "images": [
-      "https://example.com/image1.jpg",
-      "https://example.com/image2.jpg"
+      "./starry_night.jpg"
     ],
     "title": "Starry Night",
     "collections": [
@@ -39,8 +37,7 @@
   {
     "id": 456,
     "images": [
-      "https://example.com/image3.jpg",
-      "https://example.com/image4.jpg"
+      "./mona_lisa.jpg"
     ],
     "title": "Mona Lisa",
     "collections": [
@@ -57,8 +54,7 @@
   {
     "id": 252,
     "images": [
-      "https://example.com/image5.jpg",
-      "https://example.com/image6.jpg"
+      "./the_persistence_of_memory.jpg"
     ],
     "title": "The Persistence of Memory",
     "collections": [
@@ -75,8 +71,7 @@
   {
     "id": 532,
     "images": [
-      "https://example.com/image7.jpg",
-      "https://example.com/image8.jpg"
+      "./the_birth_of_venus.jpg"
     ],
     "title": "The Birth of Venus",
     "collections": [
@@ -93,8 +88,7 @@
   {
     "id": 553,
     "images": [
-      "https://example.com/image9.jpg",
-      "https://example.com/image10.jpg"
+      "./guernica.jpg"
     ],
     "title": "Guernica",
     "collections": [
