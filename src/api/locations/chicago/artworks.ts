@@ -10,8 +10,7 @@ const getImageUrl = (imageId: string) => {
 export const fetchArtworks = async (page: number, per_page: number) => {
   const response = await fetch(`${BASE_URL}/artworks?page=${page}&limit=${per_page}`);
   const chicagoObjects = await response.json();
-
-  return chicagoObjects.data.map((d: ArtObject) => {
+  return (chicagoObjects.data || []).map((d: ArtObject) => {
     return {
       ...d, location_name: "Chicago Museum", image_url: d.image_id ? getImageUrl(d.image_id)
         : "default_image.png"

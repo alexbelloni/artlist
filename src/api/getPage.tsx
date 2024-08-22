@@ -2,10 +2,10 @@ import { fetchArtworks as brooklyn } from './locations/brooklyn/artworks'
 import { fetchArtworks as chicago } from './locations/chicago/artworks'
 import { GetDisplayableDate, GetSecondsApart } from './utils';
 
-export const getPage = async (currentPage: number) => {
-    const PER_PAGE_LIMIT = 12;
-    const CACHE_TIMEOUT = 180000; //3 MINUTES
+const PER_PAGE_LIMIT = parseInt(process.env.REACT_APP_PER_PAGE_LIMIT || "0");
+const CACHE_TIMEOUT = parseInt(process.env.REACT_APP_CACHE_TIMEOUT || "0");
 
+export const getPage = async (currentPage: number) => {
     const cachedItem = localStorage.getItem(currentPage.toString());
     if (cachedItem) {
         const item = JSON.parse(cachedItem);

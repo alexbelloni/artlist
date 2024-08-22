@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import Header from "./Header";
 import Footer from "./Footer";
@@ -17,25 +17,20 @@ const ArtworkList: React.FC = () => {
   const [filter, setFilter] = useState<string>("");
   const [pageChanging, setPageChanging] = useState<boolean>(false);
   const [categories, setCategories] = useState<string[]>([]);
-  const [selectedDropdownCategory, setSelectedDropdownCategory] =
-    useState<string>("");
+  const [selectedDropdownCategory, setSelectedDropdownCategory] =useState<string>("");
   const [pageCachedAt, setPageCachedAt] = useState('')
-  //const [renderArea, setRenderArea] = useState(<nav><li>aaaa</li></nav>)
-  const [renderArea, setRenderArea] = useState(<p>asasas</p>)
-  const location = useLocation();
+  const [renderArea, setRenderArea] = useState(<nav></nav>)
 
-  const PER_PAGE_LIMIT = 12
-  const QUANTITY = 5;
+const QUANTITY = parseInt(process.env.REACT_APP_QUANTITY || "0");
 
   useEffect(() => {
     const fetchAllArtworks = async () => {
       setLoading(true);
 
-      let pageQuantityWhenStarting = QUANTITY;
+      let pageQuantityWhenStarting: number = QUANTITY;
       while (pageQuantityWhenStarting) {
         await getPage(pageQuantityWhenStarting--)
       }
-      //renderPagination()
 
       const items = await getPage(page);
       const allArtworks: ArtObject[] = items.data;
@@ -98,25 +93,6 @@ const ArtworkList: React.FC = () => {
 
   };
 
-  const renderPagination = () => {
-    return (
-      <nav>
-        <ul className="pagination justify-content-center my-4">
-          {(new Array(QUANTITY)).fill('').map((q, p) => (
-            <li key={p + 1}
-              className={`page-item ${p + 1 === page ? "active" : ""}`}
-              onClick={() => handlePageChange(p + 1)}
-            >
-              <span className="page-link">{p + 1}</span>
-            </li>
-          ))}
-        </ul>
-      </nav>
-    )
-
-    // return <ul className="pagination justify-content-center my-4">{pages}</ul>;
-  };
-
   useEffect(() => {
     setRenderArea(<nav>
       <ul className="pagination justify-content-center my-4">
@@ -130,7 +106,6 @@ const ArtworkList: React.FC = () => {
         ))}
       </ul>
     </nav>);
-
   }, [page])
 
   return (

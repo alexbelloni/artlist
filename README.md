@@ -51,4 +51,10 @@ The `ArtworkDetail` component displays details of an artwork.
   }
 ```
 
+### Environment Variables (.env)
+
+REACT_APP_PER_PAGE_LIMIT=12  
+REACT_APP_CACHE_TIMEOUT=180000  
+REACT_APP_QUANTITY=5  
+
 

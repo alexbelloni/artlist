@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { fetchArtworkDetails } from "../api/locations/chicago/artworks";
+import { fetchArtworkDetails as chicagoDetails } from "../api/locations/chicago/artworks";
+import { fetchArtworkDetails as brooklynDetails } from "../api/locations/brooklyn/artworks";
 import Header from "./Header";
 import Loading from "./Loading";
 import Footer from "./Footer";
@@ -25,7 +26,7 @@ const ArtworkDetail: React.FC = () => {
   useEffect(() => {
     const getArtwork = async () => {
       if (id) {
-        const data = await fetchArtworkDetails(parseInt(id));
+        const data = parseInt(id) > 0 ? await chicagoDetails(parseInt(id)) : await brooklynDetails(parseInt(id));
         setArtwork(data);
       }
     };
