@@ -1,4 +1,5 @@
 import { ArtObject } from '../../ArtObject'
+import { ArtObjectDetail } from '../../ArtObjectDetail'
 
 const BASE_URL = "https://api.artic.edu/api/v1";
 
@@ -21,5 +22,7 @@ export const fetchArtworks = async (page: number, per_page: number) => {
 export const fetchArtworkDetails = async (id: number) => {
   const response = await fetch(`${BASE_URL}/artworks/${id}`);
   const data = await response.json();
-  return { ...data, data: { ...data.data, image_url: `https://www.artic.edu/iiif/2/${data.data.image_id}/full/843,/0/default.jpg` } };
+  const detail: ArtObjectDetail = data.data
+  detail.image_url = getImageUrl(detail.image_id)
+  return detail;
 };

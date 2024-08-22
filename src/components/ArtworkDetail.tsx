@@ -26,7 +26,7 @@ const ArtworkDetail: React.FC = () => {
     const getArtwork = async () => {
       if (id) {
         const data = await fetchArtworkDetails(parseInt(id));
-        setArtwork(data.data);
+        setArtwork(data);
       }
     };
     getArtwork();
