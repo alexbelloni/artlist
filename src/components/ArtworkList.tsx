@@ -90,8 +90,6 @@ const ArtworkList: React.FC = () => {
     const item = await getPage(newPage);
     const allArtworks: ArtObject[] = item.data;
 
-    console.log('item.data',item.data.length,'allArtworks',allArtworks.length,)
-
     setPageCachedAt(item.cached)
     setArtworks(allArtworks);
     setFilteredArtworks(allArtworks);
@@ -132,7 +130,6 @@ const ArtworkList: React.FC = () => {
         ))}
       </ul>
     </nav>);
-    console.log('rendered page ', page)
 
   }, [page])
 

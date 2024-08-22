@@ -1,6 +1,5 @@
 import { ArtObject } from "../../ArtObject";
 import fakeDataResponse from "./fakeDataResponse.json"
-//import { ArtObject } from './ArtObject'
 
 export const fetchArtworks = async (page: number, per_page: number) => {
   return new Promise<ArtObject[]>((resolve) => {
@@ -14,6 +13,7 @@ export const fetchArtworks = async (page: number, per_page: number) => {
         main_reference_number: accession_number,
         dimensions,
         location_name: "Brooklyn Museum",
+        color: "#A69B0A",
         image_url: images[0]
       }
       return x;

@@ -10,16 +10,12 @@ export const getPage = async (currentPage: number) => {
     if (cachedItem) {
         const item = JSON.parse(cachedItem);
         if (item) {
-            console.log('found item: ', currentPage)
             const secs = GetSecondsApart(item.date, Date.now())
             if (secs < CACHE_TIMEOUT) {
-                console.log('cached: ', currentPage, JSON.stringify(item))
                 return item;
             }
         }
     }
-
-    console.log('did not find item: ', currentPage)
 
     const museums = 2;
     const data1 = await brooklyn(currentPage, PER_PAGE_LIMIT / museums);
@@ -29,6 +25,5 @@ export const getPage = async (currentPage: number) => {
 
     const item = { page: currentPage, cached: GetDisplayableDate(Date.now()), date: Date.now(), data }
     localStorage.setItem(currentPage.toString(), JSON.stringify(item));
-    console.log('saved: ', currentPage)
     return item;
 }
