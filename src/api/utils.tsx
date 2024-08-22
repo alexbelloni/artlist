@@ -1,5 +1,5 @@
 export const GetDisplayableDate = (date: number)=>{
-    return (new Date(date)).toISOString().replace('T', ' ').replace('Z', ' ')
+    return (new Date(date)).toString().substring(0,24)
 }
 
 export const GetSecondsApart= (dateStart: number, dateEnd:number)=>{

@@ -135,8 +135,8 @@ const ArtworkDetail: React.FC = () => {
                       )
                     : "Unknown Category"}
                 </div>
-                {/* <hr className="mt-4" /> */}
-                {/* <div className="mt-4">
+                <hr className="mt-4" />
+                <div className="mt-4">
                   <h4>Comments</h4>
 
                   {comments.length === 0 ? (
@@ -212,7 +212,7 @@ const ArtworkDetail: React.FC = () => {
                       Send
                     </button>
                   </form>
-                </div> */}
+                </div>
               </div>
             </div>
           </>

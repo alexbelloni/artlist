@@ -1,5 +1,7 @@
 
 # ArtListingApp Documentation
+	
+  ![app screenshot](./public/artlistingapp.jpg)
 
 ## Getting Started with Create React App
 
@@ -50,11 +52,17 @@ The `ArtworkDetail` component displays details of an artwork.
   category_titles: string[]
   }
 ```
+### Adding new Museum
+
+- In the ./api/locations, create a new museum folder.
+- In the artworks.ts, create two functions fetchArtworks and fetchArtworkDetails, which return ArtObject[] and ArtObjectDetail, respectively
+- Add these functions to getPage function, in the getPage.tsx file, and in the ArtworkDetail component. 
 
 ### Environment Variables (.env)
 
 REACT_APP_PER_PAGE_LIMIT=12  
 REACT_APP_CACHE_TIMEOUT=180000  
 REACT_APP_QUANTITY=5  
+REACT_APP_USE_CACHE=1  
 
 
