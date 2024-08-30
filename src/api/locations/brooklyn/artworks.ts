@@ -1,10 +1,24 @@
 import { ArtObject } from "../../ArtObject";
 import fakeDataResponse from "./fakeDataResponse.json"
 
-const brooklynObjectToArtObject = (brooklynObject: { id: any; title: any; collections: any; artists: any; object_date: any; accession_number: any; dimensions: any; images: any; }) => {
+export type MyAPIArtObject = { 
+  id: number; 
+  title: string; 
+  collections: string[]; 
+  artists: string[]; 
+  object_date: string; 
+  accession_number: string; 
+  dimensions: string; 
+  images: string[]; 
+}
+
+const brooklynObjectToArtObject = (brooklynObject: MyAPIArtObject) => {
   const { id, title, collections, artists, object_date, accession_number, dimensions, images } = brooklynObject;
   return {
-    id: id, image_id: id.toString(), title, category_titles: collections, artist_display: artists.join(', '),
+    id: id, 
+    image_id: id.toString(), 
+    title, category_titles: collections, 
+    artist_display: artists.join(', '),
     date_display: object_date,
     main_reference_number: accession_number,
     dimensions,

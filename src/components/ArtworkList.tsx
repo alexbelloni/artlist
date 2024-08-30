@@ -9,8 +9,8 @@ import Badge from "./Badge";
 import { getPage } from "../api/getPage";
 
 const ArtworkList: React.FC = () => {
-  const [artworks, setArtworks] = useState<any[]>([]);
-  const [filteredArtworks, setFilteredArtworks] = useState<any[]>([]);
+  const [artworks, setArtworks] = useState<ArtObject[]>([]);
+  const [filteredArtworks, setFilteredArtworks] = useState<ArtObject[]>([]);
   const [page, setPage] = useState<number>(1);
   const [totalPages, setTotalPages] = useState<number>(0);
   const [loading, setLoading] = useState<boolean>(false);

@@ -22,6 +22,8 @@ export const fetchArtworkDetails = async (id: number) => {
   const response = await fetch(`${BASE_URL}/artworks/${id}`);
   const data = await response.json();
   const detail: ArtObjectDetail = data.data
-  detail.image_url = getImageUrl(detail.image_id)
+  if (detail.image_id) {
+    detail.image_url = getImageUrl(detail.image_id)
+  }
   return detail;
 };
